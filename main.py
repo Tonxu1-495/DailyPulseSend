@@ -15,7 +15,8 @@ def run_script(script_name):
 
 
 if __name__ == "__main__":
-    run_script(r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\callApi.py')
+    #api
+    #run_script(r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\callApi.py')
 
     #Excel筛选
     run_script(r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\excelFilterSto401.py')
