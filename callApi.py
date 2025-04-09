@@ -14,7 +14,7 @@ os.makedirs(os.path.dirname(save_path), exist_ok=True)
 # 调用API
 response = requests.get(api_url)
 
-# 检查响应状态码111
+# 检查响应状态码
 if response.status_code == 200:
     # 解析JSON数据
     data = response.json()
