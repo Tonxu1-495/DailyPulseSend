@@ -7,7 +7,7 @@ import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def run_script(script_name):
-    result = subprocess.run([r'C:\Users\tonxu1\PycharmProjects\TestImg\.venv\Scripts\python.exe', script_name],
+    result = subprocess.run([r'C:\Users\tonxu1\PycharmProjects\DailyPulseSend\.venv\Scripts\python.exe', script_name],
                             capture_output=True, text=True, encoding='utf-8')
     #print(result.stdout)  # 打印脚本输出
     if result.stderr:
