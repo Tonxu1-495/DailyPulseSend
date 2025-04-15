@@ -10,6 +10,8 @@ import pythoncom
 import sys
 import io
 
+#以下为多张表截图不同坐标发送不同群的测试代码---------------------------------------------------------
+
 # 设置 stdout 和 stderr 编码为 utf-8
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
