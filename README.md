@@ -1,10 +1,10 @@
 # 项目名称
-**DailyPulseSend**
+**SalesDailyPulse**
 
 # 简介
 将EOD报告筛选并推送企业微信.
-DailyPulseSend简称DPS,通过每日脉动发送为商场提供每日销售数据动态，
-就像网络游戏中的DPS一样让商场了解每日销售表显与进步
+SalesDailyPulse简称SDP,通过每日脉动发送为商场提供每日销售数据动态，
+让商场了解每日销售表显与进步
 
 
 # 功能
