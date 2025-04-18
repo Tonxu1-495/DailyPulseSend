@@ -12,8 +12,8 @@ store_code = 401
 
 #读取数据-----------------------------------------------------------------------------------------------------------------------
 # 指定文件路径
-file_path1 = r'C:\RPAData\hfb_performance.csv'
-file_path2 = r'C:\RPAData\Test-xy.xlsx'
+file_path1 = r'C:\RPAData\api_result.csv'
+file_path2 = r'C:\RPAData\output-401.xlsx'
 
 # 读取 CSV 文件
 excel1_df = pd.read_csv(file_path1)

@@ -18,7 +18,7 @@ if os.name == 'nt':
 
 # 指定文件路径和对应的 webhook URL
 files_and_urls = [
-    (r'C:\RPAData\Test-xy.xlsx',
+    (r'C:\RPAData\output-401.xlsx',
      'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b59764ec-ae6e-4d70-a076-2ec634b1f2f5'),
     #添加第二组文件路径&WebHook地址
     #(r'C:\RPAData\Test-xy-111.xlsx',
