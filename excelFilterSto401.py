@@ -12,7 +12,7 @@ store_code = 401
 
 #读取数据-----------------------------------------------------------------------------------------------------------------------
 # 指定文件路径
-file_path1 = r'C:\RPAData\杭州门店当天日结样例数据.csv'
+file_path1 = r'C:\RPAData\hfb_performance.csv'
 file_path2 = r'C:\RPAData\Test-xy.xlsx'
 
 # 读取 CSV 文件
