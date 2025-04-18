@@ -1,29 +1,58 @@
 import requests
 import pandas as pd
 import os
+import time
 
-# 定义API URL
-api_url = "https://api.example.com/data"  # 替换为实际API
+# 设置目标 URL
+url = "http://spica-tianji-dev.internal.ingka-dt.cn/maxcompute/market/hfb/performance"
 
-# 定义保存文件的路径
-save_path = "path/to/save/output.csv"  # 替换为你想要的保存路径
+# 设置请求头
+headers = {
+    'Content-Type': 'application/json',  # 设置请求体格式为 JSON
+}
 
-# 确保目录存在
-os.makedirs(os.path.dirname(save_path), exist_ok=True)
+# 设置请求体
+payload = {
+    "pageNum": 1,  # 页数
+    "pageSize": 10,  # 行数
+    "table": "rpt_business_omni_market_hfb_performance_daily_vw",  # 表或视图
+    "instanceId": ""  # 实例ID，第一次执行为空
+}
 
-# 调用API
-response = requests.get(api_url)
+# 自定义文件路径
+file_path = r'C:\RPAData\hfb_performance.csv'  # 替换为您的目标路径
 
-# 检查响应状态码
-if response.status_code == 200:
-    # 解析JSON数据
-    data = response.json()
+while True:
+    try:
+        # 发送 POST 请求
+        response = requests.post(url, headers=headers, json=payload, timeout=10)  # 设置超时时间
 
-    # 将数据转换为DataFrame
-    df = pd.DataFrame(data)
+        # 检查请求是否成功
+        response.raise_for_status()  # 如果响应状态码不是 200，将引发 HTTPError
 
-    # 保存为CSV文件
-    df.to_csv(save_path, index=False)
-    print(f"数据已保存为 {save_path}")
-else:
-    print(f"请求失败，状态码：{response.status_code}")
+        result = response.json()
+        if result.get("success"):
+            # 提取数据
+            data = result.get("data", [])
+
+            # 创建 DataFrame
+            df = pd.DataFrame(data)
+
+            # 确保目标目录存在，若不存在则创建
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+            # 保存为 CSV 文件
+            df.to_csv(file_path, index=False, encoding='utf-8-sig')
+            print(f"数据已成功保存为 {file_path}")
+            break  # 退出循环
+        else:
+            print("请求失败:", result.get("message"))
+
+    except requests.exceptions.HTTPError as http_err:
+        print(f"HTTP 请求错误: {http_err}")
+    except requests.exceptions.RequestException as req_err:
+        print(f"请求异常: {req_err}")
+
+    # 请求失败后的等待
+    print("等待 5 分钟后重试...")
+    time.sleep(300)  # 等待 5 分钟
