@@ -10,6 +10,8 @@ formatted_date = now.strftime("%Y-%m-%d")
 #设置店号
 store_code = 401
 
+print("date----------------" + formatted_date)
+
 #读取数据-----------------------------------------------------------------------------------------------------------------------
 # 指定文件路径
 file_path1 = r'C:\RPAData\api_result.csv'
@@ -20,7 +22,7 @@ excel1_df = pd.read_csv(file_path1)
 
 #检索数据集合------------------------------------------------------------------------------------------------------------------------------
 #offline store
-filtered_df_offline_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE')].copy()
+filtered_df_offline_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] != 96)& (excel1_df['hfb_no'] != 61)& (excel1_df['hfb_no'] != 60)].copy()
 #online store
 filtered_df_online_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE')].copy()
 #IKEA Food
