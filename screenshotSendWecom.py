@@ -37,7 +37,7 @@ def wait_for_excel_ready(excel_app, timeout=30):
         if excel_app.Application.Ready:
             break
         if time.time() - start_time > timeout:
-            raise TimeoutError("Excel在规定时间内未准备好。")
+            raise TimeoutError("Excel is not ready within the specified time.")
         time.sleep(0.5)  # 每 500 毫秒检查一次
 
 def bring_excel_to_front():
@@ -106,24 +106,23 @@ def process_excel_file(excel_app, file_path, webhook_url):
             send_image(file, webhook_url)
 
     except Exception as e:
-        print(f"发生错误: {e}")
-        log_error(f"发生错误: {e}")
+        log_error(f"Error: {e}")
 
     finally:
         if workbook:
             try:
                 # 尝试关闭工作簿
                 workbook.Close(SaveChanges=False)
-                print("工作簿已成功关闭.")
+                print("Workbook Closed.")
             except Exception as ce:
-                print(f"关闭工作簿时发生错误: {ce}")
-                log_error(f"关闭工作簿时发生错误: {ce}")
+                print(f"An error occurred while closing the workbook: {ce}")
+                log_error(f"An error occurred while closing the workbook.: {ce}")
 
         # 删除临时文件
         for file in screenshots:
             if os.path.exists(file):
                 os.remove(file)
-        print("临时文件已删除。")
+        print("The temporary file has been deleted.")
 
 if __name__ == "__main__":
     pythoncom.CoInitialize()
@@ -138,17 +137,15 @@ if __name__ == "__main__":
             process_excel_file(excel_app, file_path, webhook_url)
 
     except Exception as e:
-        print(f"发生错误: {e}")
-        log_error(f"发生错误: {e}")
+        log_error(f"Error: {e}")
 
     finally:
         # 在所有处理完成后关闭 Excel 应用程序
         if excel_app:
             try:
                 excel_app.Quit()
-                print("Excel 应用程序已成功关闭.")
+                print("The Excel application has been successfully closed.")
             except Exception as ce:
-                print(f"关闭 Excel 时发生错误: {ce}")
-                log_error(f"关闭 Excel 时发生错误: {ce}")
+                log_error(f"An error occurred while closing Excel: {ce}")
 
         pythoncom.CoUninitialize()

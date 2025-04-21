@@ -2,6 +2,9 @@ import requests
 import pandas as pd
 import os
 import time
+import io
+import sys
+
 
 # 设置目标 URL
 url = "http://spica-tianji-dev.internal.ingka-dt.cn/maxcompute/market/hfb/performance"
@@ -47,20 +50,20 @@ while True:
 
                 # 检查是否还有更多数据
                 if len(data) < pageSize:  # 如果返回的数据少于 pageSize，意味着没有更多数据
-                    print(f"已获取完所有数据。总共获取到 {len(all_data)} 条数据。")
+                    print(f"Done A total of  {len(all_data)} data items ")
                     more_data = False  # 没有更多数据
                 else:
                     pageNum += 1  # 增加页数以获取下一页
-                    print(f"已获取第 {pageNum} 页数据")
+                    print(f"Receive Data - page {pageNum}")
 
                 break  # 成功获取数据，退出此层循环
 
             else:
-                print(f"请求失败: {result.get('message')}")
+                print(f"Request Failed: {result.get('message')}")
                 break  # 退出此层循环以重新尝试请求
 
         except Exception as err:  # 捕获所有异常
-            print(f"请求异常: {err}, 5秒后重试...")
+            print(f"Request Error: {err}, Retry in 5 seconds...")
             time.sleep(5)  # 重试前等待5秒
 
     if not more_data:  # 如果没有更多数据，退出主循环
@@ -76,6 +79,6 @@ if all_data:
 
     # 保存为 CSV 文件
     df.to_csv(file_path, index=False, encoding='utf-8-sig')
-    print(f"所有数据已成功保存为 {file_path}")
+    print(f"Data saved {file_path}")
 else:
-    print("没有获取到任何数据")
+    print("None Data")

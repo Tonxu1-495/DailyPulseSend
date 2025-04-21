@@ -500,7 +500,7 @@ if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
     # 保存更改
     workbook.save(file_path2)
 else:
-    print("没有足够的数据来填充")
+    print("None Data")
 
 
 
