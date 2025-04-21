@@ -48,11 +48,11 @@ while True:
 
                 # 检查是否还有更多数据
                 if len(data) < pageSize:  # 如果返回的数据少于 pageSize，意味着没有更多数据
-                    print(f"Done A total of  {len(all_data)} data items ")
+                    print(f"Received  {len(all_data)} records from the API ")
                     more_data = False  # 没有更多数据
                 else:
                     pageNum += 1  # 增加页数以获取下一页
-                    print(f"Receive Data - page {pageNum}")
+                    print(f"Receiving Data - page {pageNum}")
 
                 break  # 成功获取数据，退出此层循环
 
@@ -77,6 +77,6 @@ if all_data:
 
     # 保存为 CSV 文件
     df.to_csv(file_path, index=False, encoding='utf-8-sig')
-    print(f"Data saved {file_path}")
+    print(f"Data has been saved:{file_path}")
 else:
     print("None Data")
