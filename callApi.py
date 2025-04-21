@@ -2,8 +2,6 @@ import requests
 import pandas as pd
 import os
 import time
-import io
-import sys
 
 
 # 设置目标 URL
