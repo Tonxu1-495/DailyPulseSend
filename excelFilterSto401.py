@@ -22,8 +22,7 @@ file_path2 = r'C:\RPAData\output-401.xlsx'
 excel1_df = pd.read_csv(file_path1)
 
 
-import pandas as pd
-import numpy as np
+
 
 # 假设你的 DataFrame 已经存在并且命名为 excel1_df
 
