@@ -10,7 +10,8 @@ formatted_date = now.strftime("%Y-%m-%d")
 #设置店号
 store_code = 401
 
-print("date:" + formatted_date)
+
+print("Current date:" + formatted_date)
 
 #读取数据-----------------------------------------------------------------------------------------------------------------------
 # 指定文件路径
@@ -19,6 +20,37 @@ file_path2 = r'C:\RPAData\output-401.xlsx'
 
 # 读取 CSV 文件
 excel1_df = pd.read_csv(file_path1)
+
+
+import pandas as pd
+import numpy as np
+
+# 假设你的 DataFrame 已经存在并且命名为 excel1_df
+
+# 检查 excel1_df 是否为空，并且是否包含 agg_date 列
+if 'agg_date' in excel1_df.columns and not excel1_df.empty:
+    # 处理 agg_date 列为日期类型
+    try:
+        excel1_df['agg_date'] = pd.to_datetime(excel1_df['agg_date'], format='%Y%m%d', errors='coerce')
+
+        # 再次检查是否成功转换为日期
+        if not excel1_df['agg_date'].isnull().all():
+            # 获取 agg_date 列的第一行的有效日期
+            first_valid_date = excel1_df['agg_date'].dropna().iloc[0]  # 获取有效日期后的第一行
+
+            # 格式化日期
+            formatted_first_agg_date = first_valid_date.strftime("%Y-%m-%d")
+            print("Formatted first agg_date:", formatted_first_agg_date)
+        else:
+            print("No valid dates found in 'agg_date'.")
+
+    except Exception as e:
+        print("An error occurred while processing dates:", e)
+else:
+    print("DataFrame is empty or 'agg_date' column does not exist.")
+
+
+
 
 #检索数据集合------------------------------------------------------------------------------------------------------------------------------
 #offline store
@@ -320,7 +352,7 @@ excel_df = pd.read_excel(file_path2, sheet_name='HZ 日结模版')
 
 #写入单元格
 if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
-    sheet['C4'] = formatted_date # 写入当天日期
+    sheet['C4'] = formatted_first_agg_date # 写入当天日期
     # HFB01
     sheet['O6'] = amt_01offline[0]  # offline_amt
     sheet['N6'] = goal_01offline[0]  # offline_goal
