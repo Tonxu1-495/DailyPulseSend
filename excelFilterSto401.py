@@ -295,10 +295,10 @@ store_online_service_goal = np.round(filtered_df_service_online['sales_goal'].su
 store_online_service_ly = np.round(filtered_df_service_online['ly_sale_net_amt'].sum() / 1000).astype(int)
 
 #Store_YTD
-store_offline_ly_ytd = np.round(filtered_df_offline_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
+store_offline_ly_ytd = np.round(filtered_df_offline_store['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
 store_offline_goal_ytd = np.round(filtered_df_offline_store['sales_goal_fytd'].sum() / 1000).astype(int)
 store_offline_amt_ytd = np.round(filtered_df_offline_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
-store_online_ly_ytd = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
+store_online_ly_ytd = np.round(filtered_df_online_store['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
 store_online_goal_ytd = np.round(filtered_df_online_store['sales_goal_fytd'].sum() / 1000).astype(int)
 store_online_amt_ytd = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
 store_ikeaFood_amt_ytd = np.round(filtered_df_ikeaFood['sale_net_amt_fytd'].sum() / 1000).astype(int)
