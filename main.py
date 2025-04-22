@@ -8,7 +8,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 def run_script(script_name, log_file):
     try:
         result = subprocess.run(
-            [r'C:\Users\tonxu1\PycharmProjects\DailyPulseSend\.venv\Scripts\python.exe', script_name],
+            [r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\.venv\Scripts\python.exe', script_name],
             capture_output=True, text=True
         )
 
