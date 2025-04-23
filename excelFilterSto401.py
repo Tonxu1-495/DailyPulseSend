@@ -60,7 +60,7 @@ filtered_df_offline_store_ytd = excel1_df[(excel1_df['market_code'] == store_cod
 #online store
 filtered_df_online_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 #IKEA Food
-filtered_df_ikeaFood = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['hfb_no'] == 61) | (excel1_df['hfb_no'] == 96) | (excel1_df['hfb_no'] == 60)].copy()
+filtered_df_ikeaFood = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['product_type'] == 'food')].copy()
 #offline service
 filtered_df_service_offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 97)].copy()
 #online service
