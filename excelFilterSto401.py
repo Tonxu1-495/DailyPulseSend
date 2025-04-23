@@ -53,9 +53,12 @@ else:
 
 #检索数据集合------------------------------------------------------------------------------------------------------------------------------
 #offline store
-filtered_df_offline_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] != 96)& (excel1_df['hfb_no'] != 61)& (excel1_df['hfb_no'] != 60)].copy()
+filtered_df_offline_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] != 96) & (excel1_df['hfb_no'] != 61) & (excel1_df['hfb_no'] != 60) & (excel1_df['hfb_no'] != 97) & (excel1_df['product_type'] != 'other')].copy()
+#offline store_tyd
+filtered_df_offline_store_ytd = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] != 96) & (excel1_df['hfb_no'] != 61) & (excel1_df['hfb_no'] != 60) & (excel1_df['hfb_no'] != 97)].copy()
+
 #online store
-filtered_df_online_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE')].copy()
+filtered_df_online_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] != 97) & (excel1_df['product_type'] != 'other')& (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 #IKEA Food
 filtered_df_ikeaFood = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['hfb_no'] == 61) | (excel1_df['hfb_no'] == 96) | (excel1_df['hfb_no'] == 60)].copy()
 #offline service
@@ -151,146 +154,241 @@ filtered_df_95online = excel1_df[(excel1_df['market_code'] == store_code) & (exc
 amt_01offline = np.round(filtered_df_01offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_01offline = np.round(filtered_df_01offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_01offline = np.round(filtered_df_01offline['sales_goal'].values / 1000).astype(int)
+index_01_offline = np.round(filtered_df_01offline['sale_net_amt'].values) / np.round(filtered_df_01offline['sales_goal'].values) * 100
+index_ly_01_offline = np.round(filtered_df_01offline['sale_net_amt'].values) / np.round(filtered_df_01offline['ly_sale_net_amt'].values) * 100
 #HFB01 online
 amt_01online = np.round(filtered_df_01online['sale_net_amt'].sum() / 1000).astype(int)
 goal_01online = np.round(filtered_df_01online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_01online = np.round(filtered_df_01online['ly_sale_net_amt'].sum() / 1000).astype(int)
+index_01_online = np.round(filtered_df_01online['sale_net_amt'].sum()) / np.round(filtered_df_01online['sales_goal'].sum()) * 100
+index_ly_01_online = np.round(filtered_df_01online['sale_net_amt'].sum()) / np.round(filtered_df_01online['ly_sale_net_amt'].sum()) * 100
 #HFB02offline
 amt_02offline = np.round(filtered_df_02offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_02offline = np.round(filtered_df_02offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_02offline = np.round(filtered_df_02offline['sales_goal'].values / 1000).astype(int)
+index_02_offline = np.round(filtered_df_02offline['sale_net_amt'].values) / np.round(filtered_df_02offline['sales_goal'].values) * 100
+index_ly_02_offline = np.round(filtered_df_02offline['sale_net_amt'].values) / np.round(filtered_df_02offline['ly_sale_net_amt'].values) * 100
 #HFB02 online
 amt_02online = np.round(filtered_df_02online['sale_net_amt'].sum() / 1000).astype(int)
 goal_02online = np.round(filtered_df_02online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_02online = np.round(filtered_df_02online['ly_sale_net_amt'].sum() / 1000).astype(int)
+index_02_online = np.round(filtered_df_02online['sale_net_amt'].sum()) / np.round(filtered_df_02online['sales_goal'].sum()) * 100
+index_ly_02_online = np.round(filtered_df_02online['sale_net_amt'].sum()) / np.round(filtered_df_02online['ly_sale_net_amt'].sum()) * 100
 #HFB03offline
 amt_03offline = np.round(filtered_df_03offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_03offline = np.round(filtered_df_03offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_03offline = np.round(filtered_df_03offline['sales_goal'].values / 1000).astype(int)
+index_03_offline = np.round(filtered_df_03offline['sale_net_amt'].values) / np.round(filtered_df_03offline['sales_goal'].values) * 100
+index_ly_03_offline = np.round(filtered_df_03offline['sale_net_amt'].values) / np.round(filtered_df_03offline['ly_sale_net_amt'].values) * 100
 #HFB03 online
 amt_03online = np.round(filtered_df_03online['sale_net_amt'].sum() / 1000).astype(int)
 goal_03online = np.round(filtered_df_03online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_03online = np.round(filtered_df_03online['ly_sale_net_amt'].sum() / 1000).astype(int)
+index_03_online = np.round(filtered_df_03online['sale_net_amt'].sum()) / np.round(filtered_df_03online['sales_goal'].sum()) * 100
+index_ly_03_online = np.round(filtered_df_03online['sale_net_amt'].sum()) / np.round(filtered_df_03online['ly_sale_net_amt'].sum()) * 100
 #HFB04offline
 amt_04offline = np.round(filtered_df_04offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_04offline = np.round(filtered_df_04offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_04offline = np.round(filtered_df_04offline['sales_goal'].values / 1000).astype(int)
+index_04_offline = np.round(filtered_df_04offline['sale_net_amt'].values) / np.round(filtered_df_04offline['sales_goal'].values) * 100
+index_ly_04_offline = np.round(filtered_df_04offline['sale_net_amt'].values) / np.round(filtered_df_04offline['ly_sale_net_amt'].values) * 100
 #HFB04 online
 amt_04online = np.round(filtered_df_04online['sale_net_amt'].sum() / 1000).astype(int)
 goal_04online = np.round(filtered_df_04online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_04online = np.round(filtered_df_04online['ly_sale_net_amt'].sum() / 1000).astype(int)
+index_04_online = np.round(filtered_df_04online['sale_net_amt'].sum()) / np.round(filtered_df_04online['sales_goal'].sum()) * 100
+index_ly_04_online = np.round(filtered_df_04online['sale_net_amt'].sum()) / np.round(filtered_df_04online['ly_sale_net_amt'].sum()) * 100
 #HFB05offline
 amt_05offline = np.round(filtered_df_05offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_05offline = np.round(filtered_df_05offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_05offline = np.round(filtered_df_05offline['sales_goal'].values / 1000).astype(int)
+index_05_offline = np.round(filtered_df_05offline['sale_net_amt'].values) / np.round(filtered_df_05offline['sales_goal'].values) * 100
+index_ly_05_offline = np.round(filtered_df_05offline['sale_net_amt'].values) / np.round(filtered_df_05offline['ly_sale_net_amt'].values) * 100
 #HFB05 online
 amt_05online = np.round(filtered_df_05online['sale_net_amt'].sum() / 1000).astype(int)
 goal_05online = np.round(filtered_df_05online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_05online = np.round(filtered_df_05online['ly_sale_net_amt'].sum() / 1000).astype(int)
+index_05_online = np.round(filtered_df_05online['sale_net_amt'].sum()) / np.round(filtered_df_05online['sales_goal'].sum()) * 100
+index_ly_05_online = np.round(filtered_df_05online['sale_net_amt'].sum()) / np.round(filtered_df_05online['ly_sale_net_amt'].sum()) * 100
 #HFB06offline
 amt_06offline = np.round(filtered_df_06offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_06offline = np.round(filtered_df_06offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_06offline = np.round(filtered_df_06offline['sales_goal'].values / 1000).astype(int)
+index_06_offline = np.round(filtered_df_06offline['sale_net_amt'].values) / np.round(filtered_df_06offline['sales_goal'].values) * 100
+index_ly_06_offline = np.round(filtered_df_06offline['sale_net_amt'].values) / np.round(filtered_df_06offline['ly_sale_net_amt'].values) * 100
 #HFB06 online
 amt_06online = np.round(filtered_df_06online['sale_net_amt'].sum() / 1000).astype(int)
 goal_06online = np.round(filtered_df_06online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_06online = np.round(filtered_df_06online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB07offline
+index_06_online = np.round(filtered_df_06online['sale_net_amt'].sum()) / np.round(filtered_df_06online['sales_goal'].sum()) * 100
+index_ly_06_online = np.round(filtered_df_06online['sale_net_amt'].sum()) / np.round(filtered_df_06online['ly_sale_net_amt'].sum()) * 100
+# HFB07 offline
 amt_07offline = np.round(filtered_df_07offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_07offline = np.round(filtered_df_07offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_07offline = np.round(filtered_df_07offline['sales_goal'].values / 1000).astype(int)
-#HFB07 online
+index_07_offline = np.round(filtered_df_07offline['sale_net_amt'].values) / np.round(filtered_df_07offline['sales_goal'].values) * 100
+index_ly_07_offline = np.round(filtered_df_07offline['sale_net_amt'].values) / np.round(filtered_df_07offline['ly_sale_net_amt'].values) * 100
+
+# HFB07 online
 amt_07online = np.round(filtered_df_07online['sale_net_amt'].sum() / 1000).astype(int)
 goal_07online = np.round(filtered_df_07online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_07online = np.round(filtered_df_07online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB08offline
+index_07_online = np.round(filtered_df_07online['sale_net_amt'].sum()) / np.round(filtered_df_07online['sales_goal'].sum()) * 100
+index_ly_07_online = np.round(filtered_df_07online['sale_net_amt'].sum()) / np.round(filtered_df_07online['ly_sale_net_amt'].sum()) * 100
+
+# HFB08 offline
 amt_08offline = np.round(filtered_df_08offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_08offline = np.round(filtered_df_08offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_08offline = np.round(filtered_df_08offline['sales_goal'].values / 1000).astype(int)
-#HFB08 online
+index_08_offline = np.round(filtered_df_08offline['sale_net_amt'].values) / np.round(filtered_df_08offline['sales_goal'].values) * 100
+index_ly_08_offline = np.round(filtered_df_08offline['sale_net_amt'].values) / np.round(filtered_df_08offline['ly_sale_net_amt'].values) * 100
+
+# HFB08 online
 amt_08online = np.round(filtered_df_08online['sale_net_amt'].sum() / 1000).astype(int)
 goal_08online = np.round(filtered_df_08online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_08online = np.round(filtered_df_08online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB09fofline
+index_08_online = np.round(filtered_df_08online['sale_net_amt'].sum()) / np.round(filtered_df_08online['sales_goal'].sum()) * 100
+index_ly_08_online = np.round(filtered_df_08online['sale_net_amt'].sum()) / np.round(filtered_df_08online['ly_sale_net_amt'].sum()) * 100
+
+# HFB09 offline
 amt_09offline = np.round(filtered_df_09offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_09offline = np.round(filtered_df_09offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_09offline = np.round(filtered_df_09offline['sales_goal'].values / 1000).astype(int)
-#HFB09 online
+index_09_offline = np.round(filtered_df_09offline['sale_net_amt'].values) / np.round(filtered_df_09offline['sales_goal'].values) * 100
+index_ly_09_offline = np.round(filtered_df_09offline['sale_net_amt'].values) / np.round(filtered_df_09offline['ly_sale_net_amt'].values) * 100
+
+# HFB09 online
 amt_09online = np.round(filtered_df_09online['sale_net_amt'].sum() / 1000).astype(int)
 goal_09online = np.round(filtered_df_09online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_09online = np.round(filtered_df_09online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB10offline
+index_09_online = np.round(filtered_df_09online['sale_net_amt'].sum()) / np.round(filtered_df_09online['sales_goal'].sum()) * 100
+index_ly_09_online = np.round(filtered_df_09online['sale_net_amt'].sum()) / np.round(filtered_df_09online['ly_sale_net_amt'].sum()) * 100
+
+# HFB10 offline
 amt_10offline = np.round(filtered_df_10offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_10offline = np.round(filtered_df_10offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_10offline = np.round(filtered_df_10offline['sales_goal'].values / 1000).astype(int)
-#HFB10 online
+index_10_offline = np.round(filtered_df_10offline['sale_net_amt'].values) / np.round(filtered_df_10offline['sales_goal'].values) * 100
+index_ly_10_offline = np.round(filtered_df_10offline['sale_net_amt'].values) / np.round(filtered_df_10offline['ly_sale_net_amt'].values) * 100
+
+# HFB10 online
 amt_10online = np.round(filtered_df_10online['sale_net_amt'].sum() / 1000).astype(int)
 goal_10online = np.round(filtered_df_10online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_10online = np.round(filtered_df_10online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB11offline
+index_10_online = np.round(filtered_df_10online['sale_net_amt'].sum()) / np.round(filtered_df_10online['sales_goal'].sum()) * 100
+index_ly_10_online = np.round(filtered_df_10online['sale_net_amt'].sum()) / np.round(filtered_df_10online['ly_sale_net_amt'].sum()) * 100
+
+# HFB11 offline
 amt_11offline = np.round(filtered_df_11offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_11offline = np.round(filtered_df_11offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_11offline = np.round(filtered_df_11offline['sales_goal'].values / 1000).astype(int)
-#HFB11 online
+index_11_offline = np.round(filtered_df_11offline['sale_net_amt'].values) / np.round(filtered_df_11offline['sales_goal'].values) * 100
+index_ly_11_offline = np.round(filtered_df_11offline['sale_net_amt'].values) / np.round(filtered_df_11offline['ly_sale_net_amt'].values) * 100
+
+# HFB11 online
 amt_11online = np.round(filtered_df_11online['sale_net_amt'].sum() / 1000).astype(int)
 goal_11online = np.round(filtered_df_11online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_11online = np.round(filtered_df_11online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB12offline
+index_11_online = np.round(filtered_df_11online['sale_net_amt'].sum()) / np.round(filtered_df_11online['sales_goal'].sum()) * 100
+index_ly_11_online = np.round(filtered_df_11online['sale_net_amt'].sum()) / np.round(filtered_df_11online['ly_sale_net_amt'].sum()) * 100
+
+# HFB12 offline
 amt_12offline = np.round(filtered_df_12offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_12offline = np.round(filtered_df_12offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_12offline = np.round(filtered_df_12offline['sales_goal'].values / 1000).astype(int)
-#HFB12 online
+index_12_offline = np.round(filtered_df_12offline['sale_net_amt'].values) / np.round(filtered_df_12offline['sales_goal'].values) * 100
+index_ly_12_offline = np.round(filtered_df_12offline['sale_net_amt'].values) / np.round(filtered_df_12offline['ly_sale_net_amt'].values) * 100
+
+# HFB12 online
 amt_12online = np.round(filtered_df_12online['sale_net_amt'].sum() / 1000).astype(int)
 goal_12online = np.round(filtered_df_12online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_12online = np.round(filtered_df_12online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB13offline
+index_12_online = np.round(filtered_df_12online['sale_net_amt'].sum()) / np.round(filtered_df_12online['sales_goal'].sum()) * 100
+index_ly_12_online = np.round(filtered_df_12online['sale_net_amt'].sum()) / np.round(filtered_df_12online['ly_sale_net_amt'].sum()) * 100
+
+# HFB13 offline
 amt_13offline = np.round(filtered_df_13offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_13offline = np.round(filtered_df_13offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_13offline = np.round(filtered_df_13offline['sales_goal'].values / 1000).astype(int)
-#HFB13 online
+index_13_offline = np.round(filtered_df_13offline['sale_net_amt'].values) / np.round(filtered_df_13offline['sales_goal'].values) * 100
+index_ly_13_offline = np.round(filtered_df_13offline['sale_net_amt'].values) / np.round(filtered_df_13offline['ly_sale_net_amt'].values) * 100
+
+# HFB13 online
 amt_13online = np.round(filtered_df_13online['sale_net_amt'].sum() / 1000).astype(int)
 goal_13online = np.round(filtered_df_13online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_13online = np.round(filtered_df_13online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB14offline
+index_13_online = np.round(filtered_df_13online['sale_net_amt'].sum()) / np.round(filtered_df_13online['sales_goal'].sum()) * 100
+index_ly_13_online = np.round(filtered_df_13online['sale_net_amt'].sum()) / np.round(filtered_df_13online['ly_sale_net_amt'].sum()) * 100
+
+# HFB14 offline
 amt_14offline = np.round(filtered_df_14offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_14offline = np.round(filtered_df_14offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_14offline = np.round(filtered_df_14offline['sales_goal'].values / 1000).astype(int)
-#HFB14 online
+index_14_offline = np.round(filtered_df_14offline['sale_net_amt'].values) / np.round(filtered_df_14offline['sales_goal'].values) * 100
+index_ly_14_offline = np.round(filtered_df_14offline['sale_net_amt'].values) / np.round(filtered_df_14offline['ly_sale_net_amt'].values) * 100
+
+# HFB14 online
 amt_14online = np.round(filtered_df_14online['sale_net_amt'].sum() / 1000).astype(int)
 goal_14online = np.round(filtered_df_14online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_14online = np.round(filtered_df_14online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB15offline
+index_14_online = np.round(filtered_df_14online['sale_net_amt'].sum()) / np.round(filtered_df_14online['sales_goal'].sum()) * 100
+index_ly_14_online = np.round(filtered_df_14online['sale_net_amt'].sum()) / np.round(filtered_df_14online['ly_sale_net_amt'].sum()) * 100
+
+# HFB15 offline
 amt_15offline = np.round(filtered_df_15offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_15offline = np.round(filtered_df_15offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_15offline = np.round(filtered_df_15offline['sales_goal'].values / 1000).astype(int)
-#HFB15 online
+index_15_offline = np.round(filtered_df_15offline['sale_net_amt'].values) / np.round(filtered_df_15offline['sales_goal'].values) * 100
+index_ly_15_offline = np.round(filtered_df_15offline['sale_net_amt'].values) / np.round(filtered_df_15offline['ly_sale_net_amt'].values) * 100
+
+# HFB15 online
 amt_15online = np.round(filtered_df_15online['sale_net_amt'].sum() / 1000).astype(int)
 goal_15online = np.round(filtered_df_15online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_15online = np.round(filtered_df_15online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB16offline
+index_15_online = np.round(filtered_df_15online['sale_net_amt'].sum()) / np.round(filtered_df_15online['sales_goal'].sum()) * 100
+index_ly_15_online = np.round(filtered_df_15online['sale_net_amt'].sum()) / np.round(filtered_df_15online['ly_sale_net_amt'].sum()) * 100
+
+# HFB16 offline
 amt_16offline = np.round(filtered_df_16offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_16offline = np.round(filtered_df_16offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_16offline = np.round(filtered_df_16offline['sales_goal'].values / 1000).astype(int)
-#HFB16 online
+index_16_offline = np.round(filtered_df_16offline['sale_net_amt'].values) / np.round(filtered_df_16offline['sales_goal'].values) * 100
+index_ly_16_offline = np.round(filtered_df_16offline['sale_net_amt'].values) / np.round(filtered_df_16offline['ly_sale_net_amt'].values) * 100
+
+# HFB16 online
 amt_16online = np.round(filtered_df_16online['sale_net_amt'].sum() / 1000).astype(int)
 goal_16online = np.round(filtered_df_16online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_16online = np.round(filtered_df_16online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB17offline
+index_16_online = np.round(filtered_df_16online['sale_net_amt'].sum()) / np.round(filtered_df_16online['sales_goal'].sum()) * 100
+index_ly_16_online = np.round(filtered_df_16online['sale_net_amt'].sum()) / np.round(filtered_df_16online['ly_sale_net_amt'].sum()) * 100
+
+# HFB17 offline
 amt_17offline = np.round(filtered_df_17offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_17offline = np.round(filtered_df_17offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_17offline = np.round(filtered_df_17offline['sales_goal'].values / 1000).astype(int)
-#HFB17 online
+index_17_offline = np.round(filtered_df_17offline['sale_net_amt'].values) / np.round(filtered_df_17offline['sales_goal'].values) * 100
+index_ly_17_offline = np.round(filtered_df_17offline['sale_net_amt'].values) / np.round(filtered_df_17offline['ly_sale_net_amt'].values) * 100
+
+# HFB17 online
 amt_17online = np.round(filtered_df_17online['sale_net_amt'].sum() / 1000).astype(int)
 goal_17online = np.round(filtered_df_17online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_17online = np.round(filtered_df_17online['ly_sale_net_amt'].sum() / 1000).astype(int)
-#HFB18offline
+index_17_online = np.round(filtered_df_17online['sale_net_amt'].sum()) / np.round(filtered_df_17online['sales_goal'].sum()) * 100
+index_ly_17_online = np.round(filtered_df_17online['sale_net_amt'].sum()) / np.round(filtered_df_17online['ly_sale_net_amt'].sum()) * 100
+
+# HFB18 offline
 amt_18offline = np.round(filtered_df_18offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_18offline = np.round(filtered_df_18offline['ly_sale_net_amt'].values / 1000).astype(int)
 goal_18offline = np.round(filtered_df_18offline['sales_goal'].values / 1000).astype(int)
-#HFB18 online
+index_18_offline = np.round(filtered_df_18offline['sale_net_amt'].values) / np.round(filtered_df_18offline['sales_goal'].values) * 100
+index_ly_18_offline = np.round(filtered_df_18offline['sale_net_amt'].values) / np.round(filtered_df_18offline['ly_sale_net_amt'].values) * 100
+
+# HFB18 online
 amt_18online = np.round(filtered_df_18online['sale_net_amt'].sum() / 1000).astype(int)
 goal_18online = np.round(filtered_df_18online['sales_goal'].sum() / 1000).astype(int)
 ly_amt_18online = np.round(filtered_df_18online['ly_sale_net_amt'].sum() / 1000).astype(int)
+index_18_online = np.round(filtered_df_18online['sale_net_amt'].sum()) / np.round(filtered_df_18online['sales_goal'].sum()) * 100
+index_ly_18_online = np.round(filtered_df_18online['sale_net_amt'].sum()) / np.round(filtered_df_18online['ly_sale_net_amt'].sum()) * 100
 #HFB70offline
 amt_70offline = np.round(filtered_df_70offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_70offline = np.round(filtered_df_70offline['ly_sale_net_amt'].values / 1000).astype(int)
@@ -326,9 +424,9 @@ store_online_service_goal = np.round(filtered_df_service_online['sales_goal'].su
 store_online_service_ly = np.round(filtered_df_service_online['ly_sale_net_amt'].sum() / 1000).astype(int)
 
 #Store_YTD
-store_offline_ly_ytd = np.round(filtered_df_offline_store['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
-store_offline_goal_ytd = np.round(filtered_df_offline_store['sales_goal_fytd'].sum() / 1000).astype(int)
-store_offline_amt_ytd = np.round(filtered_df_offline_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
+store_offline_ly_ytd = np.round(filtered_df_offline_store_ytd['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
+store_offline_goal_ytd = np.round(filtered_df_offline_store_ytd['sales_goal_fytd'].sum() / 1000).astype(int)
+store_offline_amt_ytd = np.round(filtered_df_offline_store_ytd['sale_net_amt_fytd'].sum() / 1000).astype(int)
 store_online_ly_ytd = np.round(filtered_df_online_store['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
 store_online_goal_ytd = np.round(filtered_df_online_store['sales_goal_fytd'].sum() / 1000).astype(int)
 store_online_amt_ytd = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
@@ -351,6 +449,117 @@ excel_df = pd.read_excel(file_path2, sheet_name='HZ 日结模版')
 
 #写入单元格
 if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
+
+    # HFB01 offline
+    sheet['P6'] = index_01_offline[0]
+    sheet['Q6'] = index_ly_01_offline[0]
+    sheet['U6'] = index_01_online
+    sheet['V6'] = index_ly_01_online
+
+    # HFB02 offline
+    sheet['P7'] = index_02_offline[0]
+    sheet['Q7'] = index_ly_02_offline[0]
+    sheet['U7'] = index_02_online
+    sheet['V7'] = index_ly_02_online
+
+    # HFB03 offline
+    sheet['P8'] = index_03_offline[0]
+    sheet['Q8'] = index_ly_03_offline[0]
+    sheet['U8'] = index_03_online
+    sheet['V8'] = index_ly_03_online
+
+    # HFB04 offline
+    sheet['P9'] = index_04_offline[0]
+    sheet['Q9'] = index_ly_04_offline[0]
+    sheet['U9'] = index_04_online
+    sheet['V9'] = index_ly_04_online
+
+    # HFB05 offline
+    sheet['P10'] = index_05_offline[0]
+    sheet['Q10'] = index_ly_05_offline[0]
+    sheet['U10'] = index_05_online
+    sheet['V10'] = index_ly_05_online
+
+    # HFB06 offline
+    sheet['P11'] = index_06_offline[0]
+    sheet['Q11'] = index_ly_06_offline[0]
+    sheet['U11'] = index_06_online
+    sheet['V11'] = index_ly_06_online
+
+    # HFB07 offline
+    sheet['P12'] = index_07_offline[0]
+    sheet['Q12'] = index_ly_07_offline[0]
+    sheet['U12'] = index_07_online
+    sheet['V12'] = index_ly_07_online
+
+    # HFB08 offline
+    sheet['P13'] = index_08_offline[0]
+    sheet['Q13'] = index_ly_08_offline[0]
+    sheet['U13'] = index_08_online
+    sheet['V13'] = index_ly_08_online
+
+    # HFB09 offline
+    sheet['P14'] = index_09_offline[0]
+    sheet['Q14'] = index_ly_09_offline[0]
+    sheet['U14'] = index_09_online
+    sheet['V14'] = index_ly_09_online
+
+    # HFB10 offline
+    sheet['P15'] = index_10_offline[0]
+    sheet['Q15'] = index_ly_10_offline[0]
+    sheet['U15'] = index_10_online
+    sheet['V15'] = index_ly_10_online
+
+    # HFB11 offline
+    sheet['P16'] = index_11_offline[0]
+    sheet['Q16'] = index_ly_11_offline[0]
+    sheet['U16'] = index_11_online
+    sheet['V16'] = index_ly_11_online
+
+    # HFB12 offline
+    sheet['P17'] = index_12_offline[0]
+    sheet['Q17'] = index_ly_12_offline[0]
+    sheet['U17'] = index_12_online
+    sheet['V17'] = index_ly_12_online
+
+    # HFB13 offline
+    sheet['P18'] = index_13_offline[0]
+    sheet['Q18'] = index_ly_13_offline[0]
+    sheet['U18'] = index_13_online
+    sheet['V18'] = index_ly_13_online
+
+    # HFB14 offline
+    sheet['P19'] = index_14_offline[0]
+    sheet['Q19'] = index_ly_14_offline[0]
+    sheet['U19'] = index_14_online
+    sheet['V19'] = index_ly_14_online
+
+    # HFB15 offline
+    sheet['P20'] = index_15_offline[0]
+    sheet['Q20'] = index_ly_15_offline[0]
+    sheet['U20'] = index_15_online
+    sheet['V20'] = index_ly_15_online
+
+    # HFB16 offline
+    sheet['P21'] = index_16_offline[0]
+    sheet['Q21'] = index_ly_16_offline[0]
+    sheet['U21'] = index_16_online
+    sheet['V21'] = index_ly_16_online
+
+    # HFB17 offline
+    sheet['P22'] = index_17_offline[0]
+    sheet['Q22'] = index_ly_17_offline[0]
+    sheet['U22'] = index_17_online
+    sheet['V22'] = index_ly_17_online
+
+    # HFB18 offline
+    sheet['P23'] = index_18_offline[0]
+    sheet['Q23'] = index_ly_18_offline[0]
+    sheet['U23'] = index_18_online
+    sheet['V23'] = index_ly_18_online
+
+
+
     sheet['C4'] = formatted_first_agg_date # 写入当天日期
     # HFB01
     sheet['O6'] = amt_01offline[0]  # offline_amt
@@ -492,7 +701,8 @@ if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
     sheet['R25'] = ly_amt_95online # online_amt_ly
     sheet['S25'] = goal_95online # online_goal
     sheet['T25'] = amt_95online  # online_amt
-
+    sheet['O26'] = store_offline_amt   # Total
+    sheet['T26'] = store_online_amt
 
     # Store Daily
     sheet['C6'] = store_offline_ly   # offline_store_ly
