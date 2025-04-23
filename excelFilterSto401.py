@@ -53,12 +53,12 @@ else:
 
 #检索数据集合------------------------------------------------------------------------------------------------------------------------------
 #offline store
-filtered_df_offline_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] != 96) & (excel1_df['hfb_no'] != 61) & (excel1_df['hfb_no'] != 60) & (excel1_df['hfb_no'] != 97) & (excel1_df['product_type'] != 'other')].copy()
+filtered_df_offline_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['product_type'] == 'goods') & (excel1_df['product_type'] != 'other')].copy()
 #offline store_tyd
-filtered_df_offline_store_ytd = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] != 96) & (excel1_df['hfb_no'] != 61) & (excel1_df['hfb_no'] != 60) & (excel1_df['hfb_no'] != 97)].copy()
+filtered_df_offline_store_ytd = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['product_type'] == 'goods') & (excel1_df['product_type'] != 'other')].copy()
 
 #online store
-filtered_df_online_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] != 97) & (excel1_df['product_type'] != 'other')& (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
+filtered_df_online_store = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 #IKEA Food
 filtered_df_ikeaFood = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['hfb_no'] == 61) | (excel1_df['hfb_no'] == 96) | (excel1_df['hfb_no'] == 60)].copy()
 #offline service
@@ -68,83 +68,83 @@ filtered_df_service_online = excel1_df[(excel1_df['market_code'] == store_code) 
 # HFB01 offline
 filtered_df_01offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 1)].copy()
 #HFB01 online
-filtered_df_01online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 1)].copy()
+filtered_df_01online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 1) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB02 offline
 filtered_df_02offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 2)].copy()
 #HFB02 online
-filtered_df_02online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 2)].copy()
+filtered_df_02online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 2) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB03 offline
 filtered_df_03offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 3)].copy()
 #HFB03 online
-filtered_df_03online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 3)].copy()
+filtered_df_03online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 3) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB04 offline
 filtered_df_04offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 4)].copy()
 #HFB04 online
-filtered_df_04online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 4)].copy()
+filtered_df_04online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 4) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB05 offline
 filtered_df_05offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 5)].copy()
 #HFB05 online
-filtered_df_05online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 5)].copy()
+filtered_df_05online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 5) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB06 offline
 filtered_df_06offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 6)].copy()
 #HFB06 online
-filtered_df_06online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 6)].copy()
+filtered_df_06online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 6) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB07 offline
 filtered_df_07offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 7)].copy()
 #HFB07 online
-filtered_df_07online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 7)].copy()
+filtered_df_07online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 7) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB08 offline
 filtered_df_08offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 8)].copy()
 #HFB08 online
-filtered_df_08online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 8)].copy()
+filtered_df_08online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 8) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB09 offline
 filtered_df_09offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 9)].copy()
 #HFB09 online
-filtered_df_09online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 9)].copy()
+filtered_df_09online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 9) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB10 offline
 filtered_df_10offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 10)].copy()
 #HFB10 online
-filtered_df_10online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 10)].copy()
+filtered_df_10online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 10) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB11 offline
 filtered_df_11offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 11)].copy()
 #HFB11 online
-filtered_df_11online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 11)].copy()
+filtered_df_11online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 11) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB12 offline
 filtered_df_12offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 12)].copy()
 #HFB12 online
-filtered_df_12online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 12)].copy()
+filtered_df_12online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 12) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB13 offline
 filtered_df_13offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 13)].copy()
 #HFB13 online
-filtered_df_13online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 13)].copy()
+filtered_df_13online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 13) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB14 offline
 filtered_df_14offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 14)].copy()
 #HFB14 online
-filtered_df_14online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 14)].copy()
+filtered_df_14online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 14) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB15 offline
 filtered_df_15offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 15)].copy()
 #HFB15 online
-filtered_df_15online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 15)].copy()
+filtered_df_15online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 15) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB16 offline
 filtered_df_16offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 16)].copy()
 #HFB16 online
-filtered_df_16online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 16)].copy()
+filtered_df_16online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 16) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB17 offline
 filtered_df_17offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 17)].copy()
 #HFB17 online
-filtered_df_17online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 17)].copy()
+filtered_df_17online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 17) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB18 offline
 filtered_df_18offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 18)].copy()
 #HFB18 online
-filtered_df_18online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 18)].copy()
+filtered_df_18online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 18) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB70 offline
 filtered_df_70offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 70)].copy()
 #HFB70 online
-filtered_df_70online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 70)].copy()
+filtered_df_70online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 70) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 # HFB95 offline
 filtered_df_95offline = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'OFFLINE') & (excel1_df['hfb_no'] == 95)].copy()
 #HFB95 online
-filtered_df_95online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 95)].copy()
+filtered_df_95online = excel1_df[(excel1_df['market_code'] == store_code) & (excel1_df['sales_channel_lvl1'] == 'ONLINE') & (excel1_df['hfb_no'] == 95) & (excel1_df['product_type'] == 'goods') & (excel1_df['sales_channel'] != 'NEW PLATFORMS')].copy()
 
 
 
