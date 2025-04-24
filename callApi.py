@@ -76,7 +76,7 @@ if all_data:
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
     # 保存为 CSV 文件
-    df.to_csv(file_path, index=False, encoding='utf-8-sig')
+    df.to_csv(file_path, index=False, encoding='utf-8')
     print(f"Data has been saved:{file_path}")
 else:
     print("None Data")

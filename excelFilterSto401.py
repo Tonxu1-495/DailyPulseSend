@@ -18,13 +18,13 @@ print("Current date:" + formatted_date)
 file_path1 = r'C:\RPAData\api_result.csv'
 file_path2 = r'C:\RPAData\output-401.xlsx'
 
-# 读取 CSV 文件
-excel1_df = pd.read_csv(file_path1)
+
+try:
+    excel1_df = pd.read_csv('C:\\RPAData\\api_result.csv', encoding='utf-8',encoding_errors='ignore')
+except UnicodeDecodeError:
+    excel1_df = pd.read_csv('C:\\RPAData\\api_result.csv', encoding='ISO-8859-1')  # 如果 UTF-8 失败，尝试 ISO-8859-1
 
 
-
-
-# 假设你的 DataFrame 已经存在并且命名为 excel1_df
 
 # 检查 excel1_df 是否为空，并且是否包含 agg_date 列
 if 'agg_date' in excel1_df.columns and not excel1_df.empty:
@@ -390,13 +390,13 @@ ly_amt_18online = np.round(filtered_df_18online['ly_sale_net_amt'].sum() / 1000)
 index_18_online = np.round(filtered_df_18online['sale_net_amt'].sum()) / np.round(filtered_df_18online['sales_goal'].sum()) * 100
 index_ly_18_online = np.round(filtered_df_18online['sale_net_amt'].sum()) / np.round(filtered_df_18online['ly_sale_net_amt'].sum()) * 100
 #HFB70offline
-amt_70offline = np.round(filtered_df_70offline['sale_net_amt'].values / 1000).astype(int)
-ly_amt_70offline = np.round(filtered_df_70offline['ly_sale_net_amt'].values / 1000).astype(int)
-goal_70offline = np.round(filtered_df_70offline['sales_goal'].values / 1000).astype(int)
+amt_70offline = np.round(filtered_df_70offline['sale_net_amt'].values).astype(int)
+ly_amt_70offline = np.round(filtered_df_70offline['ly_sale_net_amt'].values).astype(int)
+goal_70offline = np.round(filtered_df_70offline['sales_goal'].values).astype(int)
 #HFB70 online
-amt_70online = np.round(filtered_df_70online['sale_net_amt'].sum() / 1000).astype(int)
-goal_70online = np.round(filtered_df_70online['sales_goal'].sum() / 1000).astype(int)
-ly_amt_70online = np.round(filtered_df_70online['ly_sale_net_amt'].sum() / 1000).astype(int)
+amt_70online = np.round(filtered_df_70online['sale_net_amt'].sum()).astype(int)
+goal_70online = np.round(filtered_df_70online['sales_goal'].sum()).astype(int)
+ly_amt_70online = np.round(filtered_df_70online['ly_sale_net_amt'].sum()).astype(int)
 #HFB95offline
 amt_95offline = np.round(filtered_df_95offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_95offline = np.round(filtered_df_95offline['ly_sale_net_amt'].values / 1000).astype(int)
@@ -422,6 +422,36 @@ store_offline_service_ly = np.round(filtered_df_service_offline['ly_sale_net_amt
 store_online_service_amt = np.round(filtered_df_service_online['sale_net_amt'].sum() / 1000).astype(int)
 store_online_service_goal = np.round(filtered_df_service_online['sales_goal'].sum() / 1000).astype(int)
 store_online_service_ly = np.round(filtered_df_service_online['ly_sale_net_amt'].sum() / 1000).astype(int)
+
+#Store_Index
+index_store_offline = np.round(filtered_df_offline_store['sale_net_amt'].sum()) / np.round(filtered_df_offline_store['sales_goal'].sum()) * 100
+index_store_offline_ly = np.round(filtered_df_offline_store['sale_net_amt'].sum()) / np.round(filtered_df_offline_store['ly_sale_net_amt'].sum()) * 100
+index_store_online = np.round(filtered_df_online_store['sale_net_amt'].sum()) / np.round(filtered_df_online_store['sales_goal'].sum()) * 100
+index_store_online_ly = np.round(filtered_df_online_store['sale_net_amt'].sum()) / np.round(filtered_df_online_store['ly_sale_net_amt'].sum()) * 100
+index_goods_total = (np.round(filtered_df_offline_store['sale_net_amt'].sum()) + np.round(filtered_df_online_store['sale_net_amt'].sum())) / (np.round(filtered_df_offline_store['sales_goal'].sum() + np.round(filtered_df_online_store['sales_goal'].sum()))) * 100
+index_goods_total_ly = (np.round(filtered_df_offline_store['sale_net_amt'].sum()) + np.round(filtered_df_online_store['sale_net_amt'].sum())) / (np.round(filtered_df_offline_store['ly_sale_net_amt'].sum() + np.round(filtered_df_online_store['ly_sale_net_amt'].sum()))) * 100
+index_store_service_offline = np.round(filtered_df_service_offline['sale_net_amt'].sum()) / np.round(filtered_df_service_offline['sales_goal'].sum()) * 100
+index_store_service_offline_ly = np.round(filtered_df_service_offline['sale_net_amt'].sum()) / np.round(filtered_df_service_offline['ly_sale_net_amt'].sum()) * 100
+index_store_service_online = np.round(filtered_df_service_online['sale_net_amt'].sum()) / np.round(filtered_df_service_online['sales_goal'].sum()) * 100
+index_store_service_online_ly = np.round(filtered_df_service_online['sale_net_amt'].sum()) / np.round(filtered_df_service_online['ly_sale_net_amt'].sum()) * 100
+index_service_total = (np.round(filtered_df_service_offline['sale_net_amt'].sum()) + np.round(filtered_df_service_online['sale_net_amt'].sum())) / (np.round(filtered_df_service_offline['sales_goal'].sum() + np.round(filtered_df_service_online['sales_goal'].sum()))) * 100
+index_service_total_ly = (np.round(filtered_df_service_offline['sale_net_amt'].sum()) + np.round(filtered_df_service_online['sale_net_amt'].sum())) / (np.round(filtered_df_service_offline['ly_sale_net_amt'].sum() + np.round(filtered_df_service_online['ly_sale_net_amt'].sum()))) * 100
+
+#Store_index_ytd
+index_store_offline_ytd = np.round(filtered_df_offline_store_ytd['sale_net_amt_fytd'].sum()) / np.round(filtered_df_offline_store_ytd['sales_goal_fytd'].sum()) * 100
+index_store_offline_ly_ytd = np.round(filtered_df_offline_store_ytd['sale_net_amt_fytd'].sum()) / np.round(filtered_df_offline_store_ytd['ly_sale_net_amt_fytd'].sum()) * 100
+index_store_online_ytd = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum()) / np.round(filtered_df_online_store['sales_goal_fytd'].sum()) * 100
+index_store_online_ly_ytd = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum()) / np.round(filtered_df_online_store['ly_sale_net_amt_fytd'].sum()) * 100
+index_goods_total_ytd = (np.round(filtered_df_offline_store_ytd['sale_net_amt_fytd'].sum()) + np.round(filtered_df_online_store['sale_net_amt_fytd'].sum())) / (np.round(filtered_df_offline_store_ytd['sales_goal_fytd'].sum() + np.round(filtered_df_online_store['sales_goal_fytd'].sum()))) * 100
+index_goods_total_ly_ytd = (np.round(filtered_df_offline_store_ytd['sale_net_amt_fytd'].sum()) + np.round(filtered_df_online_store['sale_net_amt_fytd'].sum())) / (np.round(filtered_df_offline_store_ytd['ly_sale_net_amt_fytd'].sum() + np.round(filtered_df_online_store['ly_sale_net_amt_fytd'].sum()))) * 100
+index_store_service_offline_ytd = np.round(filtered_df_service_offline['sale_net_amt_fytd'].sum()) / np.round(filtered_df_service_offline['sales_goal_fytd'].sum()) * 100
+index_store_service_offline_ly_ytd = np.round(filtered_df_service_offline['sale_net_amt_fytd'].sum()) / np.round(filtered_df_service_offline['ly_sale_net_amt_fytd'].sum()) * 100
+index_store_service_online_ytd = np.round(filtered_df_service_online['sale_net_amt_fytd'].sum()) / np.round(filtered_df_service_online['sales_goal_fytd'].sum()) * 100
+index_store_service_online_ly_ytd = np.round(filtered_df_service_online['sale_net_amt_fytd'].sum()) / np.round(filtered_df_service_online['ly_sale_net_amt_fytd'].sum()) * 100
+index_service_total_ytd = (np.round(filtered_df_service_offline['sale_net_amt_fytd'].sum()) + np.round(filtered_df_service_online['sale_net_amt_fytd'].sum())) / (np.round(filtered_df_service_offline['sales_goal_fytd'].sum() + np.round(filtered_df_service_online['sales_goal_fytd'].sum()))) * 100
+index_service_total_ly_ytd = (np.round(filtered_df_service_offline['sale_net_amt_fytd'].sum()) + np.round(filtered_df_service_online['sale_net_amt_fytd'].sum())) / (np.round(filtered_df_service_offline['ly_sale_net_amt_fytd'].sum() + np.round(filtered_df_service_online['ly_sale_net_amt_fytd'].sum()))) * 100
+
+
 
 #Store_YTD
 store_offline_ly_ytd = np.round(filtered_df_offline_store_ytd['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
@@ -558,7 +588,33 @@ if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
     sheet['U23'] = index_18_online
     sheet['V23'] = index_ly_18_online
 
+    #Store Index
+    sheet['F6'] = index_store_offline
+    sheet['H6'] = index_store_offline_ly
+    sheet['F7'] = index_store_online
+    sheet['H7'] = index_store_online_ly
+    sheet['F8'] = index_goods_total
+    sheet['H8'] = index_goods_total_ly
+    sheet['F10'] = index_store_service_offline
+    sheet['H10'] = index_store_service_offline_ly
+    sheet['F11'] = index_store_service_online
+    sheet['H11'] = index_store_service_online_ly
+    sheet['F12'] = index_service_total
+    sheet['H12'] = index_service_total_ly
 
+    #Store_Index_YTD
+    sheet['F16'] = index_store_offline_ytd
+    sheet['H16'] = index_store_offline_ly_ytd
+    sheet['F17'] = index_store_online_ytd
+    sheet['H17'] = index_store_online_ly_ytd
+    sheet['F18'] = index_goods_total_ytd
+    sheet['H18'] = index_goods_total_ly_ytd
+    sheet['F20'] = index_store_service_offline_ytd
+    sheet['H20'] = index_store_service_offline_ly_ytd
+    sheet['F21'] = index_store_service_online_ytd
+    sheet['H21'] = index_store_service_online_ly_ytd
+    sheet['F22'] = index_service_total_ytd
+    sheet['H22'] = index_service_total_ly_ytd
 
     sheet['C4'] = formatted_first_agg_date # 写入当天日期
     # HFB01

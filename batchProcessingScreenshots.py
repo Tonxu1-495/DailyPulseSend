@@ -13,20 +13,20 @@ import io
 #以下为多张表截图不同坐标发送不同群的测试代码---------------------------------------------------------
 
 # 设置 stdout 和 stderr 编码为 utf-8
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8',errors='ignore')
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8',errors='ignore')
 if os.name == 'nt':
     os.system('chcp 65001')
 
-# 指定文件路径和对应的 webhook URL 和截图区域
+# URL
 files_and_urls = [
-    (r'C:\RPAData\Test-xy.xlsx',
-     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=741701b2-90e1-40aa-82d4-ea71cb69279e',
-     [(50, 295, 740, 895), (835, 295, 1660, 900)]),  # 文件1及其坐标
+    (r'C:\RPAData\output-401.xlsx',
+     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b59764ec-ae6e-4d70-a076-2ec634b1f2f5',
+     [(50, 295, 740, 895), (835, 295, 1660, 900)]),
 
-    (r'C:\RPAData\Test-xy-111.xlsx',
-     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=ae7ce51a-24f0-4db4-a1be-88d6eaad8883',
-     [(50, 295, 740, 895)])  # 文件2及其坐标
+    (r'C:\RPAData\output-401-2.xlsx',
+     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b59764ec-ae6e-4d70-a076-2ec634b1f2f5',
+     [(24, 370, 890, 800)])
 ]
 
 def log_error(message):
@@ -41,7 +41,7 @@ def wait_for_excel_ready(excel_app, timeout=30):
         if excel_app.Application.Ready:
             break
         if time.time() - start_time > timeout:
-            raise TimeoutError("Excel在规定时间内未准备好。")
+            raise TimeoutError("Excel is not ready within the specified time.")
         time.sleep(0.5)  # 每 500 毫秒检查一次
 
 def bring_excel_to_front():
@@ -105,24 +105,25 @@ def process_excel_file(excel_app, file_path, webhook_url, screenshot_areas):
             send_image(file, webhook_url)
 
     except Exception as e:
-        print(f"发生错误: {e}")
-        log_error(f"发生错误: {e}")
+        print(f"Error: {e}")
+        log_error(f"Error: {e}")
 
     finally:
         if workbook:
             try:
+                excel_app.DisplayAlerts = False  # 禁用所有警告对话框
                 # 尝试关闭工作簿
                 workbook.Close(SaveChanges=False)
-                print("工作簿已成功关闭.")
+                print('Workbook has been successfully closed.')
             except Exception as ce:
-                print(f"关闭工作簿时发生错误: {ce}")
-                log_error(f"关闭工作簿时发生错误: {ce}")
+                print(f"An error occurred while closing the workbook.: {ce}")
+                log_error(f"An error occurred while closing the workbook.: {ce}")
 
         # 删除临时文件
         for file in screenshots:
             if os.path.exists(file):
                 os.remove(file)
-        print("临时文件已删除。")
+        print("Temporary files have been deleted.")
 
 if __name__ == "__main__":
     pythoncom.CoInitialize()
@@ -137,17 +138,17 @@ if __name__ == "__main__":
             process_excel_file(excel_app, file_path, webhook_url, screenshot_areas)
 
     except Exception as e:
-        print(f"发生错误: {e}")
-        log_error(f"发生错误: {e}")
+        print(f"error: {e}")
+        log_error(f"error: {e}")
 
     finally:
         # 在所有处理完成后关闭 Excel 应用程序
         if excel_app:
             try:
                 excel_app.Quit()
-                print("Excel 应用程序已成功关闭.")
+                print("Excel application has been successfully closed.")
             except Exception as ce:
-                print(f"关闭 Excel 时发生错误: {ce}")
-                log_error(f"关闭 Excel 时发生错误: {ce}")
+                print(f"An error occurred while closing Excel: {ce}")
+                log_error(f"An error occurred while closing Excel: {ce}")
 
         pythoncom.CoUninitialize()
