@@ -3,7 +3,7 @@ import sys
 import io
 
 # 设置 stdout 编码为 utf-8
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8',errors='ignore')
 
 def run_script(script_name, log_file):
     try:
@@ -42,7 +42,9 @@ if __name__ == "__main__":
         script_paths = [
             r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\callApi.py',
             r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\excelFilterSto401.py',
-            r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\screenshotSendWecom.py'
+            r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\excelFilterSto401-2.py',
+            r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\batchProcessingScreenshots.py'
+            #r'C:\Users\tonxu1\OneDrive - IKEA\Documents\GitHub\DailyPulseSend\screenshotSendWecom.py'
         ]
 
         # 运行每个脚本并捕获输出和错误
