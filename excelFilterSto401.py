@@ -390,13 +390,47 @@ ly_amt_18online = np.round(filtered_df_18online['ly_sale_net_amt'].sum() / 1000)
 index_18_online = np.round(filtered_df_18online['sale_net_amt'].sum()) / np.round(filtered_df_18online['sales_goal'].sum()) * 100
 index_ly_18_online = np.round(filtered_df_18online['sale_net_amt'].sum()) / np.round(filtered_df_18online['ly_sale_net_amt'].sum()) * 100
 #HFB70offline
-amt_70offline = np.round(filtered_df_70offline['sale_net_amt'].values).astype(int)
-ly_amt_70offline = np.round(filtered_df_70offline['ly_sale_net_amt'].values).astype(int)
-goal_70offline = np.round(filtered_df_70offline['sales_goal'].values).astype(int)
+amt_70offline = np.round(filtered_df_70offline['sale_net_amt'].values)
+ly_amt_70offline = np.round(filtered_df_70offline['ly_sale_net_amt'].values)
+goal_70offline = np.round(filtered_df_70offline['sales_goal'].values)
+
+# 计算 index_70_offline
+if goal_70offline[0] != 0:
+    index_70_offline = amt_70offline[0] / goal_70offline[0] * 100
+else:
+    index_70_offline = 0
+
+# 计算 index_70_offline_ly
+if ly_amt_70offline[0] != 0:
+    index_70_offline_ly = amt_70offline[0] / ly_amt_70offline[0] * 100
+else:
+    index_70_offline_ly = 0
+
+
 #HFB70 online
-amt_70online = np.round(filtered_df_70online['sale_net_amt'].sum()).astype(int)
-goal_70online = np.round(filtered_df_70online['sales_goal'].sum()).astype(int)
-ly_amt_70online = np.round(filtered_df_70online['ly_sale_net_amt'].sum()).astype(int)
+amt_70online = np.round(filtered_df_70online['sale_net_amt'].sum())
+goal_70online = np.round(filtered_df_70online['sales_goal'].sum())
+ly_amt_70online = np.round(filtered_df_70online['ly_sale_net_amt'].sum())
+# 计算 index_70_offline
+if goal_70online != 0:
+    index_70_online = amt_70online / goal_70online * 100
+else:
+    index_70_online = 0
+
+# 计算 index_70_offline_ly
+if ly_amt_70online != 0:
+    index_70_online_ly = amt_70online / ly_amt_70online * 100
+else:
+    index_70_online_ly = 0
+
+amt_70_total = amt_70offline[0] + amt_70online
+if goal_70offline != 0:
+    index_70_total = amt_70_total / goal_70offline * 100
+else:
+    index_70_total = 0
+
+
+
 #HFB95offline
 amt_95offline = np.round(filtered_df_95offline['sale_net_amt'].values / 1000).astype(int)
 ly_amt_95offline = np.round(filtered_df_95offline['ly_sale_net_amt'].values / 1000).astype(int)
@@ -480,6 +514,13 @@ excel_df = pd.read_excel(file_path2, sheet_name='HZ 日结模版')
 #写入单元格
 if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
 
+    #HFB Index
+    sheet['P26'] = index_store_offline
+    sheet['Q26'] = index_store_offline_ly
+    sheet['U26'] = index_store_online
+    sheet['V26'] = index_store_online_ly
+    sheet['Z26'] = index_goods_total
+    sheet['AA26'] = index_goods_total_ly
     # HFB01 offline
     sheet['P6'] = index_01_offline[0]
     sheet['Q6'] = index_ly_01_offline[0]
@@ -750,6 +791,9 @@ if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
     sheet['R24'] = ly_amt_70online # online_amt_ly
     sheet['S24'] = goal_70online # online_goal
     sheet['T24'] = amt_70online  # online_amt
+    sheet['P24'] = index_70_offline
+    sheet['Q24'] = index_70_offline_ly
+    sheet['U24'] = index_70_online
     #HFB95
     sheet['O25'] = amt_95offline[0]  # offline_amt
     sheet['N25'] = goal_95offline[0]  # offline_goal
@@ -798,6 +842,7 @@ if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
 
     # 保存更改
     workbook.save(file_path2)
+    print('Data table output-401 processing completed.')
 else:
     print("None Data")
 

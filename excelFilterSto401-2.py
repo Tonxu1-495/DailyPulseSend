@@ -9,7 +9,6 @@ formatted_date = now.strftime("%Y-%m-%d")
 # 设置店号
 store_code = 401
 
-print("Current date:" + formatted_date)
 
 # 读取数据-----------------------------------------------------------------------------------------------------------------------
 # 指定文件路径
@@ -596,6 +595,12 @@ store_offline_amt = np.round(filtered_df_offline_store['sale_net_amt_fytd'].sum(
 store_online_ly = np.round(filtered_df_online_store['ly_sale_net_amt_fytd'].sum() / 1000).astype(int)
 store_online_goal = np.round(filtered_df_online_store['sales_goal_fytd'].sum() / 1000).astype(int)
 store_online_amt = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum() / 1000).astype(int)
+index_total_offline = np.round(filtered_df_offline_store['sale_net_amt_fytd'].sum()) / np.round(filtered_df_offline_store['sales_goal_fytd'].sum()) * 100
+index_total_offline_ly = np.round(filtered_df_offline_store['sale_net_amt_fytd'].sum()) / np.round(filtered_df_offline_store['ly_sale_net_amt_fytd'].sum()) * 100
+index_total_online = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum()) / np.round(filtered_df_online_store['sales_goal_fytd'].sum()) * 100
+index_total_online_ly = np.round(filtered_df_online_store['sale_net_amt_fytd'].sum()) / np.round(filtered_df_online_store['ly_sale_net_amt_fytd'].sum()) * 100
+
+
 
 # 写入数据----------------------------------------------------------------------------------------------------------
 # 加载现有的 Excel 文件
@@ -614,7 +619,10 @@ if len(ly_amt_01offline) > 0 and len(goal_01offline) > 0:
     sheet['G27'] = store_online_ly
     sheet['H27'] = store_online_goal
     sheet['I27'] = store_online_amt
-
+    sheet['E27'] = index_total_offline
+    sheet['F27'] = index_total_offline_ly
+    sheet['J27'] = index_total_online
+    sheet['K27'] = index_total_online_ly
 
 
     # HFB01 offline
@@ -885,3 +893,4 @@ if len(ly_amt_70offline) > 0 and len(goal_70offline) > 0:
 
 # 保存更改
 workbook.save(file_path2)
+print('Data table output-401-2 processing completed.')
