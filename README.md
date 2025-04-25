@@ -16,3 +16,4 @@ SalesDailyPulse简称SDP,通过每日脉动发送为商场提供每日销售数�
 # 安装
 使用以下命令安装依赖项：
 pip install -r requirements.txt
+
