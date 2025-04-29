@@ -21,11 +21,11 @@ if os.name == 'nt':
 # URL
 files_and_urls = [
     (r'C:\RPAData\output-401.xlsx',
-     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b59764ec-ae6e-4d70-a076-2ec634b1f2f5',
+     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60a349f2-f413-4f6a-a713-205a8df3fa1d',
      [(55, 306, 738, 830), (843, 306, 1643, 878)]),
 
     (r'C:\RPAData\output-401-2.xlsx',
-     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b59764ec-ae6e-4d70-a076-2ec634b1f2f5',
+     'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=60a349f2-f413-4f6a-a713-205a8df3fa1d',
      [(25, 320, 825, 920)])
 ]
 
